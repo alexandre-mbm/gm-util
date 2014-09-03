@@ -93,21 +93,28 @@ function copy_file_if_appropriate() {
     )    
 }
 
+function fix_uFEFF() {  # character <U+FEFF> "Copy clipboard" (issue #5)
+    sed -i "s/"$(echo -ne '\uFEFF')"//g" "$1"
+}
+
 function set_file() {
     orig="$1"
     dest=$(path_of_browser_file_for "$orig")
+    fix_uFEFF "$dest"
     copy_file_if_appropriate "$orig" "$dest"
 }
 
 function get_file() {
     dest="$1"
     orig=$(path_of_browser_file_for "$dest")
+    fix_uFEFF "$orig"
     copy_file_if_appropriate "$orig" "$dest"
 }
 
 function do_diff() {
     file="$1"
     target=$(path_of_browser_file_for "$file")
+    fix_uFEFF "$target"
     diff_file "$file" "$target"
 }
 
