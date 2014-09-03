@@ -93,6 +93,12 @@ function copy_file_if_appropriate() {
     )    
 }
 
+function exits_if_no_file() {
+    msg="Error: the browser's file does not exist"
+    test -e "$1" || (echo "$msg" && return 1)
+    test $? -eq 1 && exit 1
+}
+
 function fix_uFEFF() {  # character <U+FEFF> "Copy clipboard" (issue #5)
     sed -i "s/"$(echo -ne '\uFEFF')"//g" "$1"
 }
@@ -100,6 +106,7 @@ function fix_uFEFF() {  # character <U+FEFF> "Copy clipboard" (issue #5)
 function set_file() {
     orig="$1"
     dest=$(path_of_browser_file_for "$orig")
+    exits_if_no_file "$dest"
     fix_uFEFF "$dest"
     copy_file_if_appropriate "$orig" "$dest"
 }
@@ -107,6 +114,7 @@ function set_file() {
 function get_file() {
     dest="$1"
     orig=$(path_of_browser_file_for "$dest")
+    exits_if_no_file "$orig"
     fix_uFEFF "$orig"
     copy_file_if_appropriate "$orig" "$dest"
 }
@@ -114,6 +122,7 @@ function get_file() {
 function do_diff() {
     file="$1"
     target=$(path_of_browser_file_for "$file")
+    exits_if_no_file "$target"
     fix_uFEFF "$target"
     diff_file "$file" "$target"
 }
