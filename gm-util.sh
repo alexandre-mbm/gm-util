@@ -87,7 +87,7 @@ function copy_file_if_appropriate() {
     orig="$1"
     dest="$2"
     equal_files "$orig" "$dest" && echo "Equal files. No action." || (
-        yes_or_no "Different files. Diff?" && diff_file "$orig" "$dest"
+        yes_or_no "Different files. Diff?" && diff_file "$dest" "$orig"
         yes_or_no "Continue and get the browser's file?" && cp "$orig" "$dest"
         return 0
     )    
@@ -124,7 +124,7 @@ function do_diff() {
     target=$(path_of_browser_file_for "$file")
     exits_if_no_file "$target"
     fix_uFEFF "$target"
-    diff_file "$file" "$target"
+    diff_file "$target" "$file"
 }
 
 case $1 in
