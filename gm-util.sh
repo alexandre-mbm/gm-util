@@ -88,7 +88,7 @@ function copy_file_if_appropriate() {
     dest="$2"
     equal_files "$orig" "$dest" && echo "Equal files. No action." || (
         yes_or_no "Different files. Diff?" && diff_file "$dest" "$orig"
-        yes_or_no "Continue and get the browser's file?" && cp "$orig" "$dest"
+        yes_or_no "Continue and change the target file?" && cp "$orig" "$dest"
         return 0
     )    
 }
