@@ -127,6 +127,12 @@ function do_diff() {
     diff_file "$target" "$file"
 }
 
+test $(which 'colordiff') || (
+    echo "The colordiff was not found. Install it please:"
+    echo "sudo apt-get install colordiff"
+    exit 1
+) || exit 1
+
 case $1 in
     dir)
         print_dir
