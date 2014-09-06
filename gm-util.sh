@@ -32,7 +32,7 @@ function create_link() {
 
 function print_help() {
     echo
-    echo " Syntax:  gm-util.sh [dir|link|get FILE| set FILE|diff FILE]"
+    echo " Syntax:  gm-util.sh [dir|link|get FILE|set FILE|diff FILE]"
     echo
     echo "   dir - Print gm_scripts absolute path "
     echo "  link - Create 'gm_scripts' symbolic link at HOME"
