@@ -41,6 +41,7 @@ function print_help() {
     echo "   dir - Print gm_scripts absolute path"
     echo "    ls - List files in the gm_scripts absolute path"
     echo "  link - Create 'gm_scripts' symbolic link at HOME"
+    echo "  init - Copy the browser's file to the current directory (from scratch)"
     echo "   get - Copy the browser's file to the current directory"
     echo "   set - Transform this file in the browser's file"
     echo "  diff - Do diff between file and the browser's file"
@@ -124,6 +125,14 @@ function get_file() {
     copy_file_if_appropriate "$orig" "$dest"
 }
 
+function get_file_from_scratch() {
+    orig="$1"
+    dest=$(name_of_file "$1")".user.js"
+    exits_if_no_file "$orig"
+    fix_uFEFF "$orig"
+    cp "$orig" "$dest"
+}
+
 function do_diff() {
     file="$1"
     target=$(path_of_browser_file_for "$file")
@@ -147,6 +156,9 @@ case $1 in
         ;;
     link)
         create_link
+        ;;
+    init)
+        test $2 && get_file_from_scratch "$2" || print_help
         ;;
     get)
         test $2 && get_file "$2" || print_help
