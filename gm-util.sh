@@ -26,6 +26,10 @@ function print_dir() {
     echo $GM_DIR
 }
 
+function ls_dir() {
+    ls --color $GM_DIR
+}
+
 function create_link() {
     ln -s $GM_DIR ~/
 }
@@ -35,6 +39,7 @@ function print_help() {
     echo " Syntax:  gm-util.sh [dir|link|get FILE|set FILE|diff FILE]"
     echo
     echo "   dir - Print gm_scripts absolute path "
+    echo "    ls - List files in the gm_scripts absolute path"
     echo "  link - Create 'gm_scripts' symbolic link at HOME"
     echo "   get - Copy the browser's file to the current directory"
     echo "   set - Transform this file in the browser's file"
@@ -136,6 +141,9 @@ test $(which 'colordiff') || (
 case $1 in
     dir)
         print_dir
+        ;;
+    ls)
+        ls_dir
         ;;
     link)
         create_link
