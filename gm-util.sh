@@ -40,16 +40,25 @@ function create_link() {
 
 function print_help() {
     echo
-    echo " Syntax:  gm-util.sh [dir|link|get FILE|set FILE|diff FILE]"
+    echo " Syntax:  gm-util [ls|look STRING|init FILEPATH]"
     echo
-    echo "   dir - Print gm_scripts absolute path"
+    echo "          gm-util (get|set|diff) FILE"
+    echo
     echo "    ls - List files in the gm_scripts absolute path"
     echo "  look - List the browser's file"
-    echo "  link - Create 'gm_scripts' symbolic link at HOME"
     echo "  init - Copy the browser's file to the current directory (from scratch)"
     echo "   get - Copy the browser's file to the current directory"
     echo "   set - Transform this file in the browser's file"
     echo "  diff - Do diff between file and the browser's file"
+    echo
+}
+
+function print_help_dev() {
+    echo
+    echo " Syntax:  gm-util.sh [dir|link]"
+    echo
+    echo "   dir - Print gm_scripts absolute path"
+    echo "  link - Create 'gm_scripts' symbolic link at HOME"
     echo
 }
 
@@ -176,6 +185,9 @@ case $1 in
         ;;
     diff)
         test $2 && do_diff "$2" || print_help
+        ;;
+    dev)
+        print_help_dev
         ;;
     *)
         print_help
