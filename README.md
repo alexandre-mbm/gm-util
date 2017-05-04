@@ -7,3 +7,18 @@ To uninstall:
 ```bash
 $ sudo rm /usr/local/bin/gm-util
 ```
+
+To use:
+
+At first time
+1. Create userscript on browser
+1. Discover files: `gm-util ls`
+1. Look path to file: `gm-util look STRING`
+1. Get it by first time: `gm-util init FILEPATH`
+
+Cyclically at current work directory
+1. Make edits
+1. Check the sync with browser: `gm-util diff FILE`
+    - If necessary, sync from browser: `gm-util get FILE`
+    - If necessary, sync to browser: `gm-util set FILE`
+1. Manage your Git repository
