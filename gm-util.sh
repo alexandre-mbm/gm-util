@@ -30,6 +30,10 @@ function ls_dir() {
     ls --color $GM_DIR
 }
 
+function look() {
+    find $GM_DIR/$1* | grep user.js$
+}
+
 function create_link() {
     ln -s $GM_DIR ~/
 }
@@ -40,6 +44,7 @@ function print_help() {
     echo
     echo "   dir - Print gm_scripts absolute path"
     echo "    ls - List files in the gm_scripts absolute path"
+    echo "  look - List the browser's file"
     echo "  link - Create 'gm_scripts' symbolic link at HOME"
     echo "  init - Copy the browser's file to the current directory (from scratch)"
     echo "   get - Copy the browser's file to the current directory"
@@ -153,6 +158,9 @@ case $1 in
         ;;
     ls)
         ls_dir
+        ;;
+    look)
+        test $2 && look "$2" || print_help
         ;;
     link)
         create_link
